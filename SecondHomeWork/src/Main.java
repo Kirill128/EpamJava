@@ -46,16 +46,29 @@ public class Main {
         return (month>0 && daysInMonths[month-1]>=day && day>0);
     }
     public static void thirdTask(){
-        System.out.println("Input num of tries:");
-        int numOfTry=getInputInt();
+        System.out.println("Input res of 3-3*2  , you have only 3 tries:");
+        int numOfTry=3,trueAnswer=-3;
         for(int i=1;i<=numOfTry;i++){
-
+            if(getInputInt()==-3){
+                System.out.printf("True! You won !");
+                return;
+            }
+            System.out.println("False!\nMay be you want to exit?");
+            if(getInputString()=="yes")break;
         }
+        System.out.println("You lose!");
     }
     public static void firstTask(int length){
         for(int i=0;i<length;i++){
+            for(int j=i;j<length-i;j++){
 
+
+            }
         }
+    }
+    public static String getInputString(){
+        Scanner in =new Scanner(System.in);
+        return in.next();
     }
     public static int getInputInt() {
         int num = -1;
