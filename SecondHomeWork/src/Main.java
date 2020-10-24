@@ -1,3 +1,4 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
@@ -10,7 +11,7 @@ public class Main {
             switch(numOfTask) {
                 case 1:
                     System.out.println("Input length:");
-                    firstTask(getInputInt());
+                    showArray(firstTask(getInputInt()));
                     break;
                 case 2:
                     if(secondTask())
@@ -22,7 +23,12 @@ public class Main {
                     thirdTask();
                     break;
                 case 4:
-
+                    System.out.println("Input num >= 0  and <=100:");
+                    int a=getInputInt();
+                    if(a>=0 && a<=100)
+                        System.out.println("Tries:"+getNumOfTrys(a));
+                    else
+                        System.out.println("Out of range!");
                     break;
                 default:
                     wantToWork = false;
@@ -32,10 +38,18 @@ public class Main {
     public static void showArray(int [][] arr){
         for(int i=0;i<arr.length;i++){
             for(int j=0;j<arr[i].length;j++){
-                System.out.println(arr[i][j]+" ");
+                System.out.print(arr[i][j]+" ");
             }
             System.out.println();
         }
+    }
+    public static int getNumOfTrys(int userNum){
+        Random rand =new Random();
+        int resTrys=0;
+        while(userNum!=rand.nextInt()%101){
+            resTrys++;
+        }
+        return resTrys+1;
     }
     public static boolean secondTask(){
         int [] daysInMonths=new int[]{};
@@ -46,9 +60,10 @@ public class Main {
         return (month>0 && daysInMonths[month-1]>=day && day>0);
     }
     public static void thirdTask(){
-        System.out.println("Input res of 3-3*2  , you have only 3 tries:");
+
         int numOfTry=3,trueAnswer=-3;
-        for(int i=1;i<=numOfTry;i++){
+        for(int i=0;i<numOfTry;i++){
+            System.out.println("Input res of 3-3*2  , you have only " +(numOfTry-i)+ " tries:");
             if(getInputInt()==-3){
                 System.out.printf("True! You won !");
                 return;
@@ -58,13 +73,19 @@ public class Main {
         }
         System.out.println("You lose!");
     }
-    public static void firstTask(int length){
-        for(int i=0;i<length;i++){
-            for(int j=i;j<length-i;j++){
-
-
+    public static int[][] firstTask(int length){
+        int [][] arr =new int[length][length];
+        length--;
+        for(int i=0;i<=length;i++){
+            for(int j=i;j<=length;j++){
+                arr[i][j]=i+1;
+                arr[j][i]=i+1;
+                arr[length][j]=i+1;
+                arr[j][length]=i+1;
             }
+            length--;
         }
+        return arr;
     }
     public static String getInputString(){
         Scanner in =new Scanner(System.in);
