@@ -15,9 +15,9 @@ public class Main {
                     break;
                 case 2:
                     if(secondTask())
-                        System.out.printf("Yes");
+                        System.out.println("Yes");
                     else
-                        System.out.printf("N0");
+                        System.out.println("N0");
                     break;
                 case 3:
                     thirdTask();
@@ -52,12 +52,12 @@ public class Main {
         return resTrys+1;
     }
     public static boolean secondTask(){
-        int [] daysInMonths=new int[]{};
+        int [] daysInMonths=new int[]{31,29,31,30,31,30,31,31,30,31,30,31};
         System.out.printf("Input month:");
         int month=getInputInt();
         System.out.printf("Input day:");
         int day=getInputInt();
-        return (month>0 && daysInMonths[month-1]>=day && day>0);
+        return (month>0 &&  month<13 && daysInMonths[month-1]>=day && day>0);
     }
     public static void thirdTask(){
 
