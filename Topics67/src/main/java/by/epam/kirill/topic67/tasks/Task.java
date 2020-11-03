@@ -5,23 +5,24 @@ public abstract class Task {
     private String category;
     private String name;
     private String priority;
-    private String deadlineData;
+    private String[][] deadline;
 
-    public Task(String category, String name, String priority, String deadline) {
+    public Task(String category, String name, String priority, String[][] deadlineData) {// Просто так захотелось,не ругайся)))) в нормальном проекте трижды подумаю
         this.category = category;
         this.name = name;
         this.priority = priority;
-        this.deadlineData = deadline;
+        this.deadline = deadlineData;
     }
+
+
 
     @Override
     public String toString() {
-        return "Task{" +
-                "category='" + category + '\'' +
+        return "category='" + category + '\'' +
                 ", name='" + name + '\'' +
                 ", priority='" + priority + '\'' +
-                ", deadline='" + deadlineData + '\'' +
-                '}';
+                ", deadline:'" + deadline[0][0]+":"+deadline[0][1]+" , "+deadline[1][0]+":"+deadline[1][1]+" , "+deadline[2][0]+":"+deadline[2][1] +'\''
+                ;//Можно будет  и перечислением сделать, если успею
     }
 
     public String getCategory() {
@@ -48,12 +49,12 @@ public abstract class Task {
         this.priority = priority;
     }
 
-    public String getDeadline() {
-        return deadlineData;
+    public String[][] getDeadline() {
+        return deadline;
     }
 
-    public void setDeadline(String deadline) {
-        this.deadlineData = deadline;
+    public void setDeadline(String[][] deadline) {
+        this.deadline = deadline;
     }
 
 
