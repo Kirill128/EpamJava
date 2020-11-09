@@ -1,15 +1,16 @@
 package by.epam.kirill.task;
 
-public class Task<T> {
+public class Task {
     private Category category;
     private String name;
     private Priority priority;
     private String[][] deadline;
-    private T id ;
+    private String id;
 
     public Task(){
 
     }
+
     @Override
     public String toString() {
         StringBuilder deadlinedate=new StringBuilder();
@@ -19,9 +20,10 @@ public class Task<T> {
                 ", name='" + name + '\'' +
                 ", priority='" + priority.name() + '\'' +
                 ", deadline:'" + deadlinedate.toString()+'\''+
-                id+'\'';
-    }
+                ", id:" + id+'\''
+                ;
 
+    }
     public Category getCategory() {
         return category;
     }
@@ -54,32 +56,43 @@ public class Task<T> {
         this.deadline = deadline;
     }
 
-    public T getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(T id) {
+    public void setId(String id) {
         this.id = id;
     }
-    public static class Builder<T>{
-        private Task<T> newTask;
+
+
+
+
+    public static class Builder{
+        private Task newTask;
         public Builder(){
-            newTask=new Task<T>();
+            newTask=new Task();
         }
-        public Builder<T> withCategory(Category category){
+        public Builder withCategory(Category category){
             newTask.category=category;
             return this;
         }
-        public Builder<T> withName(String name){
+        public Builder withName(String name){
             newTask.name=name;
             return this;
         }
-        public Builder<T> withPriority(Priority priority){
+        public Builder withPriority(Priority priority){
             newTask.priority=priority;
             return this;
         }
-
-        public Task<T> build(){
+        public Builder withDeadLine(String[][] deadLine){
+            newTask.deadline=deadLine;
+            return this;
+        }
+        public Builder withId(String id){
+            newTask.id=id;
+            return this;
+        }
+        public Task build(){
             return newTask;
         }
     }
