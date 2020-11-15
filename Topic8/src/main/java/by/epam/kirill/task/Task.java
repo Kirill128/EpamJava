@@ -1,11 +1,11 @@
 package by.epam.kirill.task;
 
-public class Task {
+public class Task <T>{
     private Category category;
     private String name;
     private Priority priority;
     private String[][] deadline;
-    private String id;
+    private T id;
 
     public Task(){
 
@@ -56,21 +56,21 @@ public class Task {
         this.deadline = deadline;
     }
 
-    public String getId() {
+    public T getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(T id) {
         this.id = id;
     }
 
 
 
 
-    public static class Builder{
-        private Task newTask;
+    public static class Builder<T>{
+        private Task<T> newTask;
         public Builder(){
-            newTask=new Task();
+            newTask=new Task<T>();
         }
         public Builder withCategory(Category category){
             newTask.category=category;
@@ -88,11 +88,11 @@ public class Task {
             newTask.deadline=deadLine;
             return this;
         }
-        public Builder withId(String id){
+        public Builder withId(T id){
             newTask.id=id;
             return this;
         }
-        public Task build(){
+        public Task<T> build(){
             return newTask;
         }
     }
