@@ -1,11 +1,12 @@
 package by.epam.kirill.task;
 
+import java.util.Calendar;
+
 public class Task <T> implements Comparable<Task>{
     private Category category;
     private String name;
     private Priority priority;
-    private String[][] deadline;// вот я без понятия оставить или поменять на string
-    //ведь форматы ввода разные бывают: 21.12.2020, 12.21.2020 . Как быть
+    private Calendar deadline;//почему-то я поздно об этом подумал)
     private T id;
 
     public Task(){
@@ -13,23 +14,18 @@ public class Task <T> implements Comparable<Task>{
     }
 
     public int compareTo(Task o) {
-           
+        if(this.getDeadline().getTime().after(o.getDeadline().getTime()))return 1;
+        if(this.getDeadline().getTime().before(o.getDeadline().getTime()))return -1;
+        return 0;
     }
 
     public boolean equals(Task task2) {
-        if(this==task2 || this.getId().equals(task2.getId()) )return true;// если id уникален для каждого объкта
-        if(!this.getCategory().equals(task2.getCategory())||
-                !this.getName().equals(task2.getName()) ||
-                !this.getPriority().equals(task2.getPriority())
-        )return false;
-        for(int i=0;i<this.getDeadline().length;i++){
-            for(int j=0;j<task2.getDeadline().length;j++){
-                if(this.getDeadline()[i][0].equals(task2.getDeadline()[j][0]) &&
-                        !this.getDeadline()[i][1].equals(task2.getDeadline()[j][1])
-                )return false;
-            }
-        }
-        return true;
+        return this.getCategory().equals(task2.getCategory())&&
+                this.getName().equals(task2.getName()) &&
+                this.getPriority().equals(task2.getPriority())&&
+                this.getId().equals(task2.getId())&&
+                this.getDeadline().getTime().equals(task2.getDeadline().getTime())
+                ;
     }
     /*
     public boolean equals(Task task2){
@@ -44,13 +40,10 @@ public class Task <T> implements Comparable<Task>{
 
     @Override
     public String toString() {
-        StringBuilder deadlinedate=new StringBuilder();
-        for(int i=0;i< deadline.length;i++ )
-            deadlinedate.append(deadline[i][0]+":"+deadline[i][1]+" ");
         return "category='" + category.name() + '\'' +
                 ", name='" + name + '\'' +
                 ", priority='" + priority.name() + '\'' +
-                ", deadline:'" + deadlinedate.toString()+'\''+
+                ", deadline:'" + deadline.getTime()+'\''+
                 ", id:" + id+'\''
                 ;
 
@@ -79,11 +72,11 @@ public class Task <T> implements Comparable<Task>{
         this.priority = priority;
     }
 
-    public String[][] getDeadline() {
+    public Calendar getDeadline() {
         return deadline;
     }
 
-    public void setDeadline(String[][] deadline) {
+    public void setDeadline(Calendar deadline) {
         this.deadline = deadline;
     }
 
@@ -114,7 +107,7 @@ public class Task <T> implements Comparable<Task>{
             newTask.priority=priority;
             return this;
         }
-        public Builder withDeadLine(String[][] deadLine){
+        public Builder withDeadLine(Calendar deadLine){
             newTask.deadline=deadLine;
             return this;
         }
