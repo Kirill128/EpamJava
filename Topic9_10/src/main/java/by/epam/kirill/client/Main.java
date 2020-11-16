@@ -1,29 +1,37 @@
 package by.epam.kirill.client;
 import by.epam.kirill.task.*;
+import sun.awt.image.ImageWatched;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.LinkedList;
 
 public class Main {
 
     public static void main(String [] args){
-        Task<String> taskStr=new Task.Builder<String>()
+        Task<String> task1=new Task.Builder<String>()
                 .withCategory(Category.HOMEWORK)
                 .withDeadLine(new GregorianCalendar(2020, Calendar.NOVEMBER,22))
                 .withName("TO clean room")
                 .withPriority(Priority.B)
-                .withId("skfdlfjs1323123")
+                .withId("ewil")
                 .build();
-        Task<String> taskInt=new Task.Builder<Integer>()
+        Task<String> task2=new Task.Builder<Integer>()
                 .withCategory(Category.HOMEWORK)
                 .withDeadLine(new GregorianCalendar(2020, Calendar.NOVEMBER,22))
                 .withName("TO clean room")
                 .withPriority(Priority.B)
                 .withId(12123)
                 .build();
+        Task<String> task3=new Task.Builder<Integer>()
+                .withCategory(Category.HOMEWORK)
+                .withDeadLine(new GregorianCalendar(2020, Calendar.NOVEMBER,22))
+                .withName("TO clean room")
+                .withPriority(Priority.B)
+                .withId("absd")
+                .build();
+        TaskList tasks=new TaskList(new LinkedList<Task>(task1,task2,task3));
 
-        System.out.println("TaskStr: "+taskStr.toString());
-        System.out.println("TaskStr: "+taskInt.toString());
 
     }
 }
