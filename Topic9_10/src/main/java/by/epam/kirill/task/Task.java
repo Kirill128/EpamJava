@@ -13,13 +13,13 @@ public class Task <T> implements Comparable<Task>{
 
     }
 
-    public int compareTo(Task o) {
+    public int compareTo(Task o) {// по дефолту сравниваю по дедлайнам
         if(this.getDeadline().getTime().after(o.getDeadline().getTime()))return 1;
         if(this.getDeadline().getTime().before(o.getDeadline().getTime()))return -1;
         return 0;
     }
 
-    public boolean equals(Task task2) {
+    public boolean equals(Task task2) {// сравниваю по всем параметрам
         return this.getCategory().equals(task2.getCategory())&&
                 this.getName().equals(task2.getName()) &&
                 this.getPriority().equals(task2.getPriority())&&
@@ -34,7 +34,7 @@ public class Task <T> implements Comparable<Task>{
      */
 
     @Override
-    public int hashCode() {
+    public int hashCode() {// вообще без понятия что тут написать, может id?
         return super.hashCode();
     }
 
