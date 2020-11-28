@@ -1,6 +1,5 @@
 package by.epam.kirill.client;
 import by.epam.kirill.exception.ConvertException;
-import by.epam.kirill.exception.InputLibraryException;
 import by.epam.kirill.task.*;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -22,12 +21,7 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("Input task's id to remove:");
-                    try {
-                        tasks.remove(getStringConsoleInput());
-                    }catch (InputLibraryException e){
-                        System.out.println("Check input library.");
-                    }
-
+                    tasks.remove(getStringConsoleInput());
                     break;
                 case 4:
                     System.out.println("Sort by :\n 1 - Name\n2 - Priority\n3 - Category\n4 - Dead line");
@@ -46,6 +40,7 @@ public class Main {
                             tasks.sort((Task o,Task w)->o.getDeadline().compareTo(w.getDeadline()));
                             break;
                     }
+                    tasks.showAllListInTerminal();
                     break;
                 default:
                     wantToWork = false;
@@ -65,7 +60,7 @@ public class Main {
                 .build();
     }
     public static Category chooseCategoryInConsole(){
-        System.out.println("Choose category:\1-HOMEWORK\n2-PROGRAMMING\n3-MEETING\n4-MUSIC");
+        System.out.println("Choose category:\n1-HOMEWORK\n2-PROGRAMMING\n3-MEETING\n4-MUSIC");
         switch (getIntConsoleInput()){
             case 1:
                 return Category.HOMEWORK;
@@ -89,15 +84,11 @@ public class Main {
     }
     public static String getNameConsole(){
         System.out.println("Input name of task:");
-        try {
-            return getStringConsoleInput();
-        }catch(InputLibraryException e){
-            System.out.println("Input Library problems!");
-            return null;
-        }
+        return getStringConsoleInput();
+
     }
     public static Priority getPriorityConsole(){
-        System.out.println("Choose category:\1-S\n2-A\n3-B\n4-C");
+        System.out.println("Choose category:\n1-S\n2-A\n3-B\n4-C");
         switch (getIntConsoleInput()){
             case 1:
                 return Priority.S;
@@ -112,12 +103,7 @@ public class Main {
     }
     public static String getIdConsole(){
         System.out.println("Input Id:");
-        try {
-            return getStringConsoleInput();
-        }catch(InputLibraryException e){
-            System.out.println("Input Library problems!");
-            return null;
-        }
+        return getStringConsoleInput();
     }
 
 
@@ -126,10 +112,8 @@ public class Main {
             try {
                 int a=convertStringToInt(getStringConsoleInput());
                 return a;
-            } catch (InputLibraryException ine) {
-                System.out.println("Chek your input libraries.");
-                return 0;
-            } catch (ConvertException ce) {
+            }
+            catch (ConvertException ce) {
                 System.out.println("Incorrect Input.Try again.");
                 return 0;
             }
@@ -139,19 +123,14 @@ public class Main {
         try{
             int a =Integer.parseInt(s);
             return a;
-
         }
         catch (Exception e ){
             throw new ConvertException();
         }
     }
-    public static String getStringConsoleInput()throws InputLibraryException {
-            try (Scanner in = new Scanner(System.in)){
-                String s=in.nextLine();
-                return s;
-            } catch (Exception e) {
-                throw new InputLibraryException();
-            }
+    public static String getStringConsoleInput() {
+        Scanner in=new Scanner(System.in);
+        return in.next();
     }
 
 
