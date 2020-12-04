@@ -2,6 +2,8 @@ package by.epam.kirill.client;
 import by.epam.kirill.exception.ConvertException;
 import by.epam.kirill.task.*;
 
+import javax.sound.midi.Soundbank;
+import java.sql.SQLOutput;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
@@ -14,13 +16,16 @@ public class Main {
         TaskList tasks=getSomeTasks();
         boolean wantToWork = true;
         while(wantToWork) {
-            System.out.println("Choose action:\n1 - Add Task" +
+            System.out.println("Choose action:" +
+                    "\n1 - Add Task" +
                     "\n2 - Show all Tasks" +
                     "\n3 - Remove Task using Id" +
-                    "\n4 - Sort\n5 - Filter" +
-                    "\n6 - Show Only Unique Names" +
+                    "\n4 - Sort" +
+                    "\n5 - Filter" +
+                    "\n6 - Show Only Unique Names(Map)" +
                     "\n7 - Remove same tasks" +
-                    "\n8 - Chek if all names >1 letter");
+                    "\n8 - Chek if all names >1 letter"+
+                    "\n9 - Show All Tasks Names(Map)");
             int numOfTask = getIntConsoleInput();
             switch(numOfTask) {
                 case 1:
@@ -90,6 +95,9 @@ public class Main {
                     break;
                 case 8:
                     System.out.println("Names Length > 1:"+tasks.getTasks().stream().allMatch(t->t.getName().length()>1));
+                    break;
+                case 9:
+                    tasks.getTasks().stream().map(task -> task.getName()).forEach(System.out::println);
                     break;
                 default:
                     wantToWork = false;

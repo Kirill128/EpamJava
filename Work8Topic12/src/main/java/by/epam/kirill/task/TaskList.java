@@ -45,12 +45,8 @@ public class TaskList implements Sortable {
                 .collect(Collectors.toCollection(LinkedList::new));
     }
     public static LinkedList<String> getUniqueNames(LinkedList<Task> Tasks){
-        LinkedList<String> names=new LinkedList<String>();
-        for (Task t:
-             Tasks) {
-            names.addLast(t.getName());
-        }
-        return names.stream()
+        return Tasks.stream()
+                .map(task -> task.getName())
                 .distinct()
                 .collect(Collectors.toCollection(LinkedList::new));
     }

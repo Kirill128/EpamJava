@@ -13,7 +13,7 @@ public class Task <T> implements Comparable<Task>{
 
     }
 
-    public int compareTo(Task o) {// по дефолту сравниваю по дедлайнам
+    public int compareTo(Task o) {
         if(this.getDeadline().getTime().after(o.getDeadline().getTime()))return 1;
         if(this.getDeadline().getTime().before(o.getDeadline().getTime()))return -1;
         return 0;
@@ -30,7 +30,13 @@ public class Task <T> implements Comparable<Task>{
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        char[] arr=id.toString().toCharArray();
+        int answer=1;
+        int i=1;
+        for(char s : arr){
+            answer=(int)s+answer*(i++);
+        }
+        return answer;
     }
 
     @Override
