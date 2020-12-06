@@ -25,7 +25,8 @@ public class Main {
                     "\n6 - Show Only Unique Names(Map)" +
                     "\n7 - Remove same tasks" +
                     "\n8 - Chek if all names >1 letter"+
-                    "\n9 - Show All Tasks Names(Map)");
+                    "\n9 - Show All Tasks Names(Map)" +
+                    "\n10 - Show time until deadline");
             int numOfTask = getIntConsoleInput();
             switch(numOfTask) {
                 case 1:
@@ -99,6 +100,12 @@ public class Main {
                 case 9:
                     tasks.getTasks().stream().map(task -> task.getName()).forEach(System.out::println);
                     break;
+                case 10:
+                    tasks.getTasks().stream().forEach(t->System.out.println("Time until deadline in Tasks with" +t.toString()+" : \n"
+                            +t.timeFromNowToDeadLine().getDays()+" Days\n"
+                            +t.timeFromNowToDeadLine().getMonths()+" Months\n"
+                            +t.timeFromNowToDeadLine().getYears()+" Years\n"));
+                    break;
                 default:
                     wantToWork = false;
                     break;
@@ -111,42 +118,42 @@ public class Main {
         TaskList tasks=new TaskList();
         tasks.add(new Task.Builder<String>()
                 .withCategory(Category.MEETING)
-                .withDeadLine(new GregorianCalendar(2020,12,12))
+                .withDeadLine(new GregorianCalendar(2021,1,12))
                 .withName("Client meeting")
                 .withPriority(Priority.S)
                 .withId("123456790")
                 .build());
         tasks.add(new Task.Builder<String>()
                 .withCategory(Category.HOMEWORK)
-                .withDeadLine(new GregorianCalendar(2020,12 ,2))
+                .withDeadLine(new GregorianCalendar(2021,1 ,2))
                 .withName("English")
                 .withPriority(Priority.A)
                 .withId("fsdfsd12")
                 .build());
         tasks.add(new Task.Builder<String>()
                 .withCategory(Category.MUSIC)
-                .withDeadLine(new GregorianCalendar(2020,12,6))
+                .withDeadLine(new GregorianCalendar(2021,1,6))
                 .withName("Rok and roll")
                 .withPriority(Priority.A)
                 .withId("hmmmmmmsoooooo")
                 .build());
         tasks.add(new Task.Builder<String>()
                 .withCategory(Category.HOMEWORK)
-                .withDeadLine(new GregorianCalendar(2020,12 ,2))
+                .withDeadLine(new GregorianCalendar(2021,1 ,2))
                 .withName("English")
                 .withPriority(Priority.A)
                 .withId("fsdfsd12")
                 .build());
         tasks.add(new Task.Builder<String>()
                 .withCategory(Category.MUSIC)
-                .withDeadLine(new GregorianCalendar(2020,12,6))
+                .withDeadLine(new GregorianCalendar(2021,1,6))
                 .withName("Rok and roll")
                 .withPriority(Priority.A)
                 .withId("hmmmmmmsoooooo")
                 .build());
         tasks.add(new Task.Builder<String>()
                 .withCategory(Category.MUSIC)
-                .withDeadLine(new GregorianCalendar(2020,12,6))
+                .withDeadLine(new GregorianCalendar(2021,1,6))
                 .withName("R")
                 .withPriority(Priority.A)
                 .withId("hmmmmmmsoooooo")

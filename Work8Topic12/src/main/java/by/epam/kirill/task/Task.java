@@ -1,6 +1,9 @@
 package by.epam.kirill.task;
-
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.Calendar;
+import java.util.Date;
 
 public class Task <T> implements Comparable<Task>{
     private Category category;
@@ -27,7 +30,9 @@ public class Task <T> implements Comparable<Task>{
         return this.toString().equals(task2.toString());
     }
      */
-
+    public Period timeFromNowToDeadLine(){
+        return  Period.between( LocalDate.now(), this.deadline.getTime().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+    }
     @Override
     public int hashCode() {
         char[] arr=id.toString().toCharArray();
