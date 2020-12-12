@@ -3,6 +3,10 @@ import by.epam.kirill.exception.ConvertException;
 import by.epam.kirill.task.*;
 
 import javax.sound.midi.Soundbank;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.sql.SQLOutput;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
@@ -26,7 +30,8 @@ public class Main {
                     "\n7 - Remove same tasks" +
                     "\n8 - Chek if all names >1 letter"+
                     "\n9 - Show All Tasks Names(Map)" +
-                    "\n10 - Show time until deadline");
+                    "\n10 - Show time until deadline"+
+                    "\n11 - Get saved Tasks List");
             int numOfTask = getIntConsoleInput();
             switch(numOfTask) {
                 case 1:
@@ -106,12 +111,28 @@ public class Main {
                             +t.timeFromNowToDeadLine().getMonths()+" Months\n"
                             +t.timeFromNowToDeadLine().getYears()+" Years\n"));
                     break;
+                case 11:
+                    try(ObjectInputStream ois = new ObjectInputStream(new FileInputStream("list.dat")))
+                    {
+                        tasks=(TaskList) ois.readObject();
+                        tasks.showAllListInTerminal();
+                    }
+                    catch(Exception ex){
+
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
                 default:
                     wantToWork = false;
                     break;
             }
         }
+        try(ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("list.dat"))){
+            oos.writeObject(tasks);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
 
+        }
     }
 
     public static TaskList getSomeTasks(){

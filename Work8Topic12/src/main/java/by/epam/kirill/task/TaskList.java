@@ -1,5 +1,6 @@
 package by.epam.kirill.task;
 
+import java.io.Serializable;
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.ListIterator;
@@ -7,7 +8,7 @@ import java.util.function.Predicate;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
-public class TaskList implements Sortable {
+public class TaskList implements Sortable, Serializable {
     private LinkedList<Task> Tasks;
 
     public TaskList(LinkedList<Task> tasks){
@@ -16,6 +17,7 @@ public class TaskList implements Sortable {
     public TaskList(){
         Tasks=new LinkedList<Task>();
     }
+
 
     public void deleteAll(){
         Tasks=new LinkedList<Task>();

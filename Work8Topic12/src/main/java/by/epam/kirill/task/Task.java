@@ -1,11 +1,12 @@
 package by.epam.kirill.task;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.Period;
 import java.time.ZoneId;
 import java.util.Calendar;
 import java.util.Date;
 
-public class Task <T> implements Comparable<Task>{
+public class Task <T> implements Comparable<Task>, Serializable {
     private Category category;
     private String name;
     private Priority priority;
