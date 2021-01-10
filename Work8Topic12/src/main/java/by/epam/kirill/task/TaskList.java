@@ -30,8 +30,7 @@ public class TaskList implements Sortable, Serializable {
         Tasks.remove(task);
     }
     public void remove(String Id){
-        for (Task t:
-             Tasks) {
+        for (Task t: Tasks) {
             if(Id.equals(t.getId()))remove(t);
         }
     }
